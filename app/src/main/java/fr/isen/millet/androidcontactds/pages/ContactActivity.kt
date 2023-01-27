@@ -1,4 +1,4 @@
-package fr.isen.millet.androidcontactds
+package fr.isen.millet.androidcontactds.pages
 
 import CustomAdapter
 import android.annotation.SuppressLint
@@ -53,17 +53,9 @@ class ContactActivity : AppCompatActivity() {
 
 
                     val gson = Gson()
-                    // get the data from the json object and put it in the data class object (data)
                     val data: Data = gson.fromJson(it.toString(), Data::class.java)
-                    // get the list of dishes from the data class object
                     val list = data.results
                     Log.d("TAG3", list.toString())
-
-
-                    //val list: Results = gson.fromJson(it.toString(), Results::class.java)
-                   // Log.d("TAG", list.toString())
-
-                    //val filterList = list.data.firstOrNull() { it.name_fr == binding.TitleCategorie.text }
 
                     binding.pBar.visibility = View.GONE
 
@@ -71,11 +63,6 @@ class ContactActivity : AppCompatActivity() {
                    if (list != null) {
                           adapter.refreshList(list)
                     }
-
-                    //update list
-
-
-
                 },
                 {
 
