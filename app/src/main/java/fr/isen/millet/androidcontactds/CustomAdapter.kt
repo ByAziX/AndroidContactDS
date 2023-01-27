@@ -20,6 +20,7 @@ class CustomAdapter(private val list: ArrayList<Results>, private val OnItemClic
         val nameView: TextView = itemView.findViewById(R.id.nameView)
         val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val emailView: TextView = itemView.findViewById(R.id.emailView)
+        val locationView: TextView = itemView.findViewById(R.id.locationView)
     }
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,6 +37,7 @@ class CustomAdapter(private val list: ArrayList<Results>, private val OnItemClic
         val itemsViewModel = list[position]
         holder.nameView.text = itemsViewModel.name?.first + " " + (itemsViewModel.name?.last ?: "")
         holder.emailView.text = itemsViewModel.email
+        holder.locationView.text = itemsViewModel.location?.street?.name + " " + itemsViewModel.location?.street?.number + ", " + itemsViewModel.location?.city + ", " + itemsViewModel.location?.state + ", " + itemsViewModel.location?.country + ", " + itemsViewModel.location?.postcode
 
         if (itemsViewModel.picture?.medium != "") {
             Picasso.get().load(itemsViewModel.picture?.medium).into(holder.imageView)
