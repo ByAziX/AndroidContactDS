@@ -48,6 +48,7 @@ class CustomAdapter(private val list: ArrayList<Results>, private val OnItemClic
             OnItemClickListener(itemsViewModel)
         }
     }
+    // function which will refresh the list
     @SuppressLint("NotifyDataSetChanged")
     fun refreshList(newList: List<Results>?) {
         list.clear()

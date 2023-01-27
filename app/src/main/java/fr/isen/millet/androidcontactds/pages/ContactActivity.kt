@@ -19,6 +19,7 @@ import org.json.JSONObject
 class ContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactBinding
     private var url = "https://randomuser.me/api/?results=10&nat=fr"
+    var countPage = 1
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +34,28 @@ class ContactActivity : AppCompatActivity() {
 
             getApiContact()
 
+        binding.buttonPageSuivante.setOnClickListener {
+            countPage++
+            pageSuivante()
+            binding.buttonPagePrecedente.isEnabled = true
+
+
+        }
+
+            binding.buttonPagePrecedente.setOnClickListener {
+                if (countPage > 1) {
+                    countPage--
+                    pageSuivante()
+                } else {
+                    binding.buttonPagePrecedente.isEnabled = false
+                }
+
+
+
+            }
+
             val recyclerView = binding.recyclerview
             recyclerView.layoutManager = LinearLayoutManager(this)
-
             recyclerView.adapter = CustomAdapter(arrayListOf()) {
 
                 val intent = Intent(this, ContactDetailsActivity::class.java)
@@ -51,8 +71,18 @@ class ContactActivity : AppCompatActivity() {
             Log.d ("onDestroy", "$this onDestroy")
         }
 
+    fun pageSuivante() {
 
-    fun getApiContact(){
+            url = "https://randomuser.me/api/?results=10&nat=fr&page=" + countPage
+            Log.d("URL", countPage.toString())
+            binding.pageView.text = countPage.toString()
+            getApiContact()
+
+    }
+
+
+    // function wich get the api and parse it to the adapter to display it in the recyclerview
+    private fun getApiContact(){
         val json = JSONObject()
         json.put("results", 10)
 
