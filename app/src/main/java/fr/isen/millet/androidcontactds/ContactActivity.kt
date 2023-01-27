@@ -12,7 +12,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import fr.isen.millet.androidcontactds.databinding.ActivityContactBinding
-import fr.isen.millet.androidcontactds.modelData.Results
+import fr.isen.millet.androidcontactds.modelData.Data
 import org.json.JSONObject
 
 class ContactActivity : AppCompatActivity() {
@@ -43,16 +43,24 @@ class ContactActivity : AppCompatActivity() {
 
             }
             val json = JSONObject()
-            json.put("id_shop", "1")
+            json.put("results", 10)
 
             val request = JsonObjectRequest(
                 Request.Method.GET, url, json,
                 {
+                    Log.d("TAG2", it.toString())
 
 
                     val gson = Gson()
-                    val list: Results = gson.fromJson(it.toString(), Results::class.java)
-                    Log.d("TAG", list.toString())
+                    // get the data from the json object and put it in the data class object (data)
+                    val data = gson.fromJson(it.toString(), Data::class.java)
+                    // get the list of dishes from the data class object
+                    val list = data.results
+
+
+                    //val list: Results = gson.fromJson(it.toString(), Results::class.java)
+                   // Log.d("TAG", list.toString())
+
                     //val filterList = list.data.firstOrNull() { it.name_fr == binding.TitleCategorie.text }
 
                     binding.pBar.visibility = View.GONE

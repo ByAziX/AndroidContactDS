@@ -1,10 +1,12 @@
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import fr.isen.millet.androidcontactds.R
 import fr.isen.millet.androidcontactds.modelData.Results
 
@@ -35,19 +37,19 @@ class CustomAdapter(private val list: ArrayList<Results>, private val OnItemClic
         holder.nameView.text = itemsViewModel.name?.first + " " + (itemsViewModel.name?.last ?: "")
         holder.emailView.text = itemsViewModel.email
 
-        /*if (itemsViewModel.picture != "") {
-            Picasso.get().load(itemsViewModel.images[0]).into(holder.imageView)
-            Log.d("image", itemsViewModel.images[0])
+        if (itemsViewModel.picture?.medium != "") {
+            Picasso.get().load(itemsViewModel.picture?.medium).into(holder.imageView)
+            Log.d("image", itemsViewModel.picture?.medium.toString())
 
-        }*/
+        }
         holder.itemView.setOnClickListener{
             OnItemClickListener(itemsViewModel)
         }
     }
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshList(newList: Results) {
+    fun refreshList(newList: List<Results>?) {
         list.clear()
-        list.addAll(listOf(newList))
+        list.addAll(newList!!)
         notifyDataSetChanged()
     }
     // return the number of the items in the list
