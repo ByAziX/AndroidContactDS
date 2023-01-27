@@ -28,7 +28,7 @@ class ContactActivity : AppCompatActivity() {
 
 
             binding.pBar.visibility = View.VISIBLE
-            binding.TitleContact.text = "Affichage des conatcts"
+            binding.TitleContact.text = "Affichage des contacts"
 
             title = binding.TitleContact.text
 
