@@ -2,6 +2,7 @@ package fr.isen.millet.androidcontactds
 
 import CustomAdapter
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +18,7 @@ import org.json.JSONObject
 
 class ContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactBinding
-    private var url = "https://randomuser.me/api/"
+    private var url = "https://randomuser.me/api/?results=10&nat=fr"
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +35,10 @@ class ContactActivity : AppCompatActivity() {
             val recyclerView = binding.recyclerview
             recyclerView.layoutManager = LinearLayoutManager(this)
 
-            recyclerView.adapter = CustomAdapter(arrayListOf()) { //title: String, price: String, image: String ->
+            recyclerView.adapter = CustomAdapter(arrayListOf()) {
 
-                //val intent = Intent(this, DetailsDishesActivity::class.java)
-                //intent.putExtra("Items", it)
+                val intent = Intent(this, ContactDetailsActivity::class.java)
+                intent.putExtra("results", it)
 
                 startActivity(intent)
 
@@ -53,9 +54,10 @@ class ContactActivity : AppCompatActivity() {
 
                     val gson = Gson()
                     // get the data from the json object and put it in the data class object (data)
-                    val data = gson.fromJson(it.toString(), Data::class.java)
+                    val data: Data = gson.fromJson(it.toString(), Data::class.java)
                     // get the list of dishes from the data class object
                     val list = data.results
+                    Log.d("TAG3", list.toString())
 
 
                     //val list: Results = gson.fromJson(it.toString(), Results::class.java)

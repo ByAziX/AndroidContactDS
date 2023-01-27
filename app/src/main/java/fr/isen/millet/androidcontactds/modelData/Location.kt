@@ -8,4 +8,4 @@ data class Location(  @SerializedName("street"      ) var street      : Street? 
                       @SerializedName("country"     ) var country     : String?      = null,
                       @SerializedName("postcode"    ) var postcode    : Int?         = null,
                       @SerializedName("coordinates" ) var coordinates : Coordinates? = Coordinates(),
-                      @SerializedName("timezone"    ) var timezone    : Timezone?    = Timezone())
+                      @SerializedName("timezone"    ) var timezone    : Timezone?    = Timezone()) : java.io.Serializable

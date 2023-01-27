@@ -2,7 +2,7 @@ package fr.isen.millet.androidcontactds.modelData
 
 import com.google.gson.annotations.SerializedName
 
-data class Results(
+data class Results (
     @SerializedName("gender"     ) var gender     : String?     = null,
     @SerializedName("name"       ) var name       : Name?       = Name(),
     @SerializedName("location"   ) var location   : Location?   = Location(),
@@ -14,4 +14,4 @@ data class Results(
     @SerializedName("cell"       ) var cell       : String?     = null,
     @SerializedName("id"         ) var id         : Id?         = Id(),
     @SerializedName("picture"    ) var picture    : Picture?    = Picture(),
-    @SerializedName("nat"        ) var nat        : String?     = null)
+    @SerializedName("nat"        ) var nat        : String?     = null) : java.io.Serializable

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/yellow"
     android:orientation="vertical"
-    tools:context=".CategorieActivity">
+    tools:context=".ContactActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="@+id/recyclerview"
         app:layout_constraintStart_toStartOf="@+id/recyclerview"
         app:layout_constraintTop_toBottomOf="@+id/TitleContact"
-        app:layout_constraintVertical_bias="0.007"></ProgressBar>
+        app:layout_constraintVertical_bias="0.007" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
