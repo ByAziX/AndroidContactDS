@@ -31,6 +31,7 @@ class ContactActivity : AppCompatActivity() {
 
             title = binding.TitleContact.text
 
+            getApiContact()
 
             val recyclerView = binding.recyclerview
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -43,37 +44,44 @@ class ContactActivity : AppCompatActivity() {
                 startActivity(intent)
 
             }
-            val json = JSONObject()
-            json.put("results", 10)
 
-            val request = JsonObjectRequest(
-                Request.Method.GET, url, json,
-                {
-                    Log.d("TAG2", it.toString())
-
-
-                    val gson = Gson()
-                    val data: Data = gson.fromJson(it.toString(), Data::class.java)
-                    val list = data.results
-                    Log.d("TAG3", list.toString())
-
-                    binding.pBar.visibility = View.GONE
-
-                    val adapter = binding.recyclerview.adapter as CustomAdapter
-                   if (list != null) {
-                          adapter.refreshList(list)
-                    }
-                },
-                {
-
-                    Log.e("API Error", it.toString())
-                })
-
-
-            Volley.newRequestQueue(this).add(request)
         }
         override fun onDestroy() {
             super.onDestroy()
             Log.d ("onDestroy", "$this onDestroy")
         }
+
+
+    fun getApiContact(){
+        val json = JSONObject()
+        json.put("results", 10)
+
+        val request = JsonObjectRequest(
+            Request.Method.GET, url, json,
+            {
+                Log.d("TAG2", it.toString())
+
+
+                val gson = Gson()
+                val data: Data = gson.fromJson(it.toString(), Data::class.java)
+                val list = data.results
+                Log.d("TAG3", list.toString())
+
+                binding.pBar.visibility = View.GONE
+
+                val adapter = binding.recyclerview.adapter as CustomAdapter
+                if (list != null) {
+                    adapter.refreshList(list)
+                }
+            },
+            {
+
+                Log.e("API Error", it.toString())
+            })
+
+
+        Volley.newRequestQueue(this).add(request)
+    }
+
+
     }
