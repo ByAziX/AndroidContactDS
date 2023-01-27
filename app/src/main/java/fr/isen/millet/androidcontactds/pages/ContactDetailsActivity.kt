@@ -16,14 +16,12 @@ class ContactDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val results = intent.extras?.get("results") as Results
+        val phone = results.phone?.split("-")?.joinToString(" ")
 
         binding.nameContactDetailsView.text = results.name?.title + " " + results.name?.first + " " + results.name?.last
         binding.emailContactdetailsView.text = results.email
         binding.phoneContactDetailsView.text = ""
-        // split le numero de telephone pour avoir le bon format
-        val phone = results.phone?.split("-")?.joinToString(" ")
         binding.phoneContactDetailsView.text = phone
-
         binding.locationContactDetailsView.text =  results.location?.street?.name + " " + results.location?.street?.number + ", " + results.location?.city + ", " + results.location?.state + ", " + results.location?.country + ", " + results.location?.postcode
         binding.dateContactDetailsView.text = results.dob?.date?.substring(8, 10) + "/" + results.dob?.date?.substring(5, 7) + "/" + results.dob?.date?.substring(0, 4)
 
@@ -31,6 +29,9 @@ class ContactDetailsActivity : AppCompatActivity() {
         Picasso.get().load(results.picture?.large).into(binding.imageContactdetailsView)
 
 
+
+
     }
+
 
 }

@@ -49,9 +49,6 @@ class ContactActivity : AppCompatActivity() {
                 } else {
                     binding.buttonPagePrecedente.isEnabled = false
                 }
-
-
-
             }
 
             val recyclerView = binding.recyclerview
@@ -73,7 +70,7 @@ class ContactActivity : AppCompatActivity() {
 
     fun pageSuivante() {
 
-            url = "https://randomuser.me/api/?results=10&nat=fr&page=" + countPage
+            url = "https://randomuser.me/api/?results=10&nat=fr&page=$countPage"
             Log.d("URL", countPage.toString())
             binding.pageView.text = countPage.toString()
             getApiContact()
